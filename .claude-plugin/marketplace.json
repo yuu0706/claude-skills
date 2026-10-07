@@ -1,0 +1,14 @@
+{
+  "name": "yuu0706-skills",
+  "description": "業務の進め方の規則をまとめたスキル集",
+  "owner": {
+    "name": "yuu0706"
+  },
+  "plugins": [
+    {
+      "name": "work-rules",
+      "source": "./plugins/work-rules",
+      "description": "資料・画面文言・表記・コミット・安全の確認・サブエージェントの運用の規則"
+    }
+  ]
+}
