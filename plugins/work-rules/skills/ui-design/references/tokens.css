@@ -39,6 +39,17 @@
   --color-focus-ring: #0969da;
   --color-scrim: rgb(31 35 40 / 0.32);  /* 引き出しとダイアログの背後の覆い */
 
+  /* ---------- 色: 人の名前の横の丸い印（SKILL.md 3節。2026-10-15 指示） ---------- */
+  /* 名前のハッシュで1つを選ぶ。白の文字でコントラスト比 4.5 以上を保つ。紫・藍は使わない（SKILL.md 5節） */
+  --avatar-1: #0969da;  /* 青 */
+  --avatar-2: #1a7f37;  /* 緑 */
+  --avatar-3: #bc4c00;  /* 橙 */
+  --avatar-4: #cf222e;  /* 赤 */
+  --avatar-5: #8a5a2b;  /* 茶 */
+  --avatar-6: #59636e;  /* 灰 */
+  --avatar-7: #0e7490;  /* 水色 */
+  --avatar-8: #7d6608;  /* 黄土 */
+
   /* ---------- 余白: 4px の倍数 ---------- */
   --space-0: 0;
   --space-1: 4px;
@@ -88,6 +99,8 @@
   --tooltip-max-w: min(480px, 90vw);  /* ポップアップの最大幅 */
   --icon-sm: 16px;
   --icon-md: 20px;
+  --avatar-sm: 18px;      /* 表の行・ツリーの中の丸い印 */
+  --avatar-md: 24px;      /* 本文・詳細の丸い印 */
 
   /* ---------- 角丸 ---------- */
   --radius-sm: 4px;   /* バッジ・小さな部品 */
@@ -176,6 +189,14 @@
     --color-danger-subtle: #25171c;
     --color-focus-ring: #2f81f7;
     --color-scrim: rgb(1 4 9 / 0.60);
+    --avatar-1: #1f6feb;
+    --avatar-2: #238636;
+    --avatar-3: #bd561d;
+    --avatar-4: #da3633;
+    --avatar-5: #9a6b3f;
+    --avatar-6: #6e7781;
+    --avatar-7: #0f7f96;
+    --avatar-8: #8f6d0a;
     --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
     --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
   }
@@ -207,6 +228,14 @@
   --color-danger-subtle: #25171c;
   --color-focus-ring: #2f81f7;
   --color-scrim: rgb(1 4 9 / 0.60);
+  --avatar-1: #1f6feb;
+  --avatar-2: #238636;
+  --avatar-3: #bd561d;
+  --avatar-4: #da3633;
+  --avatar-5: #9a6b3f;
+  --avatar-6: #6e7781;
+  --avatar-7: #0f7f96;
+  --avatar-8: #8f6d0a;
   --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
   --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
 }

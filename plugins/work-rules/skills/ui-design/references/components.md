@@ -62,6 +62,32 @@ export function matchBelow(name) {
 }
 ```
 
+人の名前の横の丸い印は次のとおりにする（SKILL.md 3節。2026-10-15 指示）。色は名前のハッシュで `--avatar-1`〜`--avatar-8` から選び、同じ名前にはいつも同じ色を出す。
+
+```html
+<span class="person"><span class="avatar" aria-hidden="true" style="--avatar-bg: var(--avatar-3)">山</span>山田太郎</span>
+```
+
+```css
+@layer components {
+  .person { display: inline-flex; align-items: center; gap: var(--space-2); }
+  .avatar { display: inline-grid; place-items: center; flex: none; width: var(--avatar-md); height: var(--avatar-md); border-radius: var(--radius-full); background: var(--avatar-bg, var(--avatar-6)); color: var(--color-text-on-accent); font-size: var(--text-xs); font-weight: var(--weight-bold); line-height: 1; }
+  .avatar--sm { width: var(--avatar-sm); height: var(--avatar-sm); }
+}
+```
+
+```js
+// avatar.js: 名前から色の番号（1〜8）と頭文字を決める。乱数を使わず、再描画しても色が変わらないようにする
+export function avatarColor(name) {
+  let h = 0;
+  for (const ch of name) h = (h * 31 + ch.codePointAt(0)) >>> 0;
+  return `var(--avatar-${(h % 8) + 1})`;
+}
+export function avatarInitial(name) {
+  return Array.from(name.trim())[0] ?? "?";
+}
+```
+
 ## 1. ページ見出しと主要な操作
 
 見出し行の左に「何の画面か（対象）」、右端に主要な操作を置く。スクロール前に必ず見える。
