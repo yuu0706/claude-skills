@@ -42,6 +42,26 @@ export function matchBelow(name) {
 }
 ```
 
+読み上げ用の見えないラベルは、次の定型だけを使う。`clip-path` を省かない。置く先のスクロールする箱には `position: relative` を付ける（SKILL.md 8節 型G）。
+
+```css
+@layer base {
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+```
+
+省略した名前の全文のポップアップと、本文の中のメンションは次のとおりにする（SKILL.md 3節）。
+
+```css
+@layer components {
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* 省略されているとき（scrollWidth > clientWidth）だけ、JS がホバー 300ms 後とフォーカスで表示する */
+  .tooltip { position: fixed; z-index: var(--z-overlay); max-width: var(--tooltip-max-w); padding: var(--space-1) var(--space-2); font-size: var(--text-sm); color: var(--color-text); background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); box-shadow: var(--shadow-overlay); }
+  .mention { padding: 0 var(--space-1); border-radius: var(--radius-sm); background: var(--color-accent-subtle); }
+  .mention--self, .mention--all { background: var(--color-warning-subtle); }
+}
+```
+
 ## 1. ページ見出しと主要な操作
 
 見出し行の左に「何の画面か（対象）」、右端に主要な操作を置く。スクロール前に必ず見える。
@@ -217,13 +237,11 @@ export function matchBelow(name) {
   .badge--warning { color: var(--color-warning); background: var(--color-warning-subtle); }
   .badge--danger { color: var(--color-danger); background: var(--color-danger-subtle); }
   .badge--neutral { color: var(--color-text-muted); background: var(--color-bg-subtle); }
-
-  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 }
 ```
 
 バッジの高さ `--badge-h`（20px）は、文字 12px と上下の余白 4px の和である（目安）。
-枠線の 1px とフォーカスの輪の 2px、`.visually-hidden` の 1px は、直書きを許す例外とする。
+枠線の 1px とフォーカスの輪の 2px、`.visually-hidden`（0節）の 1px は、直書きを許す例外とする。
 
 ## 5. フォーム
 
@@ -288,8 +306,9 @@ export function matchBelow(name) {
   /* 高さを決めないと overflow: auto の箱にならず、th の sticky が効かない。--header-h は .page-header の min-height と同じ値 */
   .split { display: grid; grid-template-columns: minmax(var(--list-min-w), 2fr) 3fr; height: calc(100dvh - var(--header-h)); min-height: 0; }
   /* isolation で th の z-index を箱の中に閉じ込める。閉じ込めないと、ページが動いたときに th が .page-header（同じ --z-sticky）の上に描かれる */
-  .split__list { overflow: auto; isolation: isolate; border-right: 1px solid var(--color-border); }
-  .split__detail { overflow: auto; padding: var(--space-page-y) var(--space-page-x); }
+  /* position: relative を外さない。static のままだと、中の絶対配置の要素（.visually-hidden など）が箱のスクロールで切り取られず、文書全体の高さを伸ばす（SKILL.md 8節 型G） */
+  .split__list { position: relative; overflow: auto; isolation: isolate; border-right: 1px solid var(--color-border); }
+  .split__detail { position: relative; overflow: auto; padding: var(--space-page-y) var(--space-page-x); }
   .split__detail p { max-width: var(--measure); }
   .props { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2) var(--space-6); margin: 0; font-size: var(--text-md); }
   .props dt { color: var(--color-text-muted); }

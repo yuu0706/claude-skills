@@ -110,6 +110,8 @@
   --badge-h: 20px;
   --form-w: 480px;
   --list-min-w: 320px;
+  /* ポップアップの最大幅 */
+  --tooltip-max-w: min(480px, 90vw);
   --icon-sm: 16px;
   --icon-md: 20px;
   --measure: 70ch;
@@ -136,6 +138,19 @@
   --row-h: 48px;
   --control-h-sm: 32px;
   --control-h-md: 40px;
+  --badge-h: 24px;
+}
+
+/* 利用者本人が長時間見る自分用の道具: 文字を1段大きくする。余白は変えない */
+[data-text="large"] {
+  --text-xs: 13px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --row-h: 40px;
+  --control-h-sm: 30px;
+  --control-h-md: 36px;
   --badge-h: 24px;
 }
 
