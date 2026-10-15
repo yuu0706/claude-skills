@@ -1,0 +1,208 @@
+/*
+ * ui-design のデザイントークン（Tailwind v4 の @theme 版）
+ *
+ * 使う条件: 新規のプロジェクトか、テーマ定義が無いプロジェクトだけに使う。
+ * 既存の @theme（例: グローバルの CSS に書いた @theme）があれば、そちらが正本である。混ぜない。
+ * 値は tokens.css と同じにする。片方だけを変えない。
+ * Tailwind の名前空間に合わせて名前が違う変数がある: --weight-* は --font-weight-*、--easing は --ease-standard。
+ * components.md の CSS は tokens.css の名前で書いてあるため、Tailwind 版へそのまま写さず、ユーティリティで書き直す。
+ *
+ * Tailwind の既定の色（purple・indigo など）と既定の文字サイズを initial で消す。
+ * 消さないと bg-purple-500 や text-2xl が使えてしまい、トークンの外の値を書く余地が残る。
+ */
+
+@import "tailwindcss";
+
+/*
+ * ダークの色は下の変数の差し替えで OS の設定と data-theme の両方に従う。
+ * dark: の接頭辞は data-theme="dark" のときだけ効く。色は変数で切り替わるため、dark: は原則として使わない。
+ */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --breakpoint-*: initial;
+
+  /* 色: 面と文字。bg-bg / text-text-muted / border-border のように使う */
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f6f8fa;
+  --color-bg-hover: #eef1f4;
+  --color-bg-selected: #e7f0fd;
+  --color-border: #d1d9e0;
+  --color-border-subtle: #e6eaef;
+  --color-text: #1f2328;
+  --color-text-muted: #59636e;
+  --color-text-disabled: #8c959f;
+  --color-text-on-accent: #ffffff;
+
+  /* 色: 意味を持つ色。主要な操作とリンクは accent（青）に固定する */
+  --color-accent: #0969da;
+  --color-accent-hover: #0757b8;
+  --color-accent-subtle: #ddf4ff;
+  --color-success: #1a7f37;
+  --color-success-subtle: #dafbe1;
+  --color-warning: #9a6700;
+  --color-warning-subtle: #fff8c5;
+  --color-danger: #cf222e;
+  --color-danger-hover: #a40e26;
+  --color-danger-subtle: #ffebe9;
+  --color-focus-ring: #0969da;
+  --color-scrim: rgb(31 35 40 / 0.32);
+  --color-transparent: transparent;
+
+  /* 余白: p-1 = 4px、p-4 = 16px。4px の倍数だけになる */
+  --spacing: 4px;
+
+  /* 文字 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+
+  /* 角丸 */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  /* 影: 浮いている面（メニュー・ダイアログ・引き出し）だけに使う */
+  --shadow-overlay: 0 8px 24px rgb(31 35 40 / 0.12);
+  --shadow-modal: 0 12px 32px rgb(31 35 40 / 0.20);
+
+  /* 画面幅の境目。sm: / md: / lg: の接頭辞になる。JS は :root の --bp-* を読む */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1280px;
+
+  /* 動き */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/*
+ * @theme に名前空間が無い値（重なり順・寸法・画面幅の境目の JS 用）は :root に置く。
+ * z-[var(--z-drawer)] / h-[var(--row-h)] のように変数で参照する。z-7 のような生の数値を書かない。
+ */
+:root {
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-drawer: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  --control-h-sm: 28px;
+  --control-h-md: 32px;
+  --control-h-lg: 40px;
+  --row-h: 36px;
+  --header-h: 72px;
+  --sidebar-w: 240px;
+  --badge-h: 20px;
+  --form-w: 480px;
+  --list-min-w: 320px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --measure: 70ch;
+
+  --space-page-x: 24px;
+  --space-page-y: 16px;
+  --space-section: 24px;
+
+  --bp-sm: 640px;
+  --bp-md: 960px;
+  --bp-lg: 1280px;
+
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+}
+
+/* 一般利用者向け: 余白と文字を1段広げる */
+[data-density="comfortable"] {
+  --space-page-x: 32px;
+  --space-page-y: 24px;
+  --space-section: 40px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --row-h: 48px;
+  --control-h-sm: 32px;
+  --control-h-md: 40px;
+  --badge-h: 24px;
+}
+
+/*
+ * ダーク。ユーティリティは var(--color-*) を参照するため、変数を差し替えるだけで切り替わる。
+ * 部品ごとに dark: を書き足さない。
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #0d1117;
+    --color-bg-subtle: #151b23;
+    --color-bg-hover: #1f2630;
+    --color-bg-selected: #172a45;
+    --color-border: #3d444d;
+    --color-border-subtle: #262c36;
+    --color-text: #e6edf3;
+    --color-text-muted: #9198a1;
+    --color-text-disabled: #656c76;
+    --color-accent: #2f81f7;
+    --color-accent-hover: #4493f8;
+    --color-accent-subtle: #121d2f;
+    --color-success: #3fb950;
+    --color-success-subtle: #12261e;
+    --color-warning: #d29922;
+    --color-warning-subtle: #272115;
+    --color-danger: #f85149;
+    --color-danger-hover: #ff7b72;
+    --color-danger-subtle: #25171c;
+    --color-focus-ring: #2f81f7;
+    --color-scrim: rgb(1 4 9 / 0.60);
+    --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
+    --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
+  }
+}
+
+/* 値は上の @media の中と同じにする */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0d1117;
+  --color-bg-subtle: #151b23;
+  --color-bg-hover: #1f2630;
+  --color-bg-selected: #172a45;
+  --color-border: #3d444d;
+  --color-border-subtle: #262c36;
+  --color-text: #e6edf3;
+  --color-text-muted: #9198a1;
+  --color-text-disabled: #656c76;
+  --color-accent: #2f81f7;
+  --color-accent-hover: #4493f8;
+  --color-accent-subtle: #121d2f;
+  --color-success: #3fb950;
+  --color-success-subtle: #12261e;
+  --color-warning: #d29922;
+  --color-warning-subtle: #272115;
+  --color-danger: #f85149;
+  --color-danger-hover: #ff7b72;
+  --color-danger-subtle: #25171c;
+  --color-focus-ring: #2f81f7;
+  --color-scrim: rgb(1 4 9 / 0.60);
+  --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
+  --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+  }
+}

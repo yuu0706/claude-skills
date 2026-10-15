@@ -1,0 +1,206 @@
+/*
+ * ui-design のデザイントークン（素の CSS 変数版）
+ *
+ * 使う条件: 新規のプロジェクトか、テーマ定義が無いプロジェクトだけに使う。
+ * 既存のテーマ定義（MUI の createTheme のテーマ、Tailwind の @theme、既存の :root 変数）があれば、そちらが正本である。
+ * 値は tokens-tailwind.css と同じにする。片方だけを変えない。
+ *
+ * 見本は GitHub の設定画面と Linear である。数値の根拠は SKILL.md の「4. 密度・余白・文字」に書く。
+ * 部品のコードは、色・余白・寸法をここの変数だけで書く。生の値（#fff、13px、z-index: 7）を書かない。
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---------- 色: 面と文字 ---------- */
+  --color-bg: #ffffff;              /* ページの地 */
+  --color-bg-subtle: #f6f8fa;       /* 表の見出し行・操作バー・サイドバー */
+  --color-bg-hover: #eef1f4;        /* 行と項目に重ねたとき */
+  --color-bg-selected: #e7f0fd;     /* 選択中の行・項目 */
+  --color-border: #d1d9e0;          /* 区切り線・入力欄の枠 */
+  --color-border-subtle: #e6eaef;   /* 表の行の区切り */
+  --color-text: #1f2328;            /* 本文 */
+  --color-text-muted: #59636e;      /* 補助の文字。白地でコントラスト比 4.5 以上を保つ */
+  --color-text-disabled: #8c959f;   /* 無効の文字。読ませる文字には使わない */
+  --color-text-on-accent: #ffffff;
+
+  /* ---------- 色: 意味を持つ色 ---------- */
+  /* 主要な操作とリンクの色は青に固定する。紫を既定色にしない（SKILL.md 5節） */
+  --color-accent: #0969da;
+  --color-accent-hover: #0757b8;
+  --color-accent-subtle: #ddf4ff;
+  --color-success: #1a7f37;
+  --color-success-subtle: #dafbe1;
+  --color-warning: #9a6700;
+  --color-warning-subtle: #fff8c5;
+  --color-danger: #cf222e;
+  --color-danger-hover: #a40e26;
+  --color-danger-subtle: #ffebe9;
+  --color-focus-ring: #0969da;
+  --color-scrim: rgb(31 35 40 / 0.32);  /* 引き出しとダイアログの背後の覆い */
+
+  /* ---------- 余白: 4px の倍数 ---------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* 画面の外周と節の間隔。一般利用者向けは [data-density="comfortable"] で1段広げる */
+  --space-page-x: var(--space-6);
+  --space-page-y: var(--space-4);
+  --space-section: var(--space-6);
+
+  /* ---------- 文字 ---------- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --text-xs: 12px;    /* バッジ・表の補助 */
+  --text-sm: 13px;    /* 表のセル・補助の文字 */
+  --text-md: 14px;    /* 業務画面の本文・入力欄・ボタン */
+  --text-lg: 16px;    /* 節の見出し。一般利用者向けの本文 */
+  --text-xl: 20px;    /* ページの見出し */
+
+  --leading-tight: 1.25;  /* 見出し */
+  --leading-normal: 1.5;  /* 本文 */
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-bold: 600;
+
+  --measure: 70ch;    /* 本文の1行の幅。65〜75ch の中央 */
+
+  /* ---------- 寸法 ---------- */
+  --control-h-sm: 28px;   /* 表の中のボタン */
+  --control-h-md: 32px;   /* 既定のボタン・入力欄 */
+  --control-h-lg: 40px;   /* 一般利用者向けの主要な操作 */
+  --row-h: 36px;          /* 表の行の高さ */
+  --header-h: 72px;       /* 見出し行（.page-header）の高さ。パンくず1行と h1 の自然な高さ 69.5px を 4px の倍数に切り上げた値。.split の高さの計算に使う */
+  --sidebar-w: 240px;     /* 左のナビの幅（表示の既定値。利用者の控えや実測値を入れない。SKILL.md 8節 型A） */
+  --badge-h: 20px;        /* 文字 12px と上下の余白 4px の和 */
+  --form-w: 480px;        /* 入力の1列の上限（目安） */
+  --list-min-w: 320px;    /* 一覧と詳細の2列での一覧の最小幅（目安） */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+
+  /* ---------- 角丸 ---------- */
+  --radius-sm: 4px;   /* バッジ・小さな部品 */
+  --radius-md: 6px;   /* ボタン・入力欄・枠 */
+  --radius-lg: 8px;   /* ダイアログ・引き出し */
+  --radius-full: 9999px;
+
+  /* ---------- 影: 浮いている面だけに使う ---------- */
+  --shadow-none: none;
+  --shadow-overlay: 0 8px 24px rgb(31 35 40 / 0.12);  /* メニュー・ポップオーバー */
+  --shadow-modal: 0 12px 32px rgb(31 35 40 / 0.20);   /* ダイアログ・引き出し */
+
+  /* ---------- 重なり順: 層の名前だけを使う。生の数値を書かない ---------- */
+  --z-base: 0;
+  --z-sticky: 100;    /* 固定の見出し行・操作バー・表の見出し */
+  --z-drawer: 200;    /* 左右の引き出し・面と、その背後の覆い（覆いは DOM で前に置く） */
+  --z-overlay: 300;   /* ドロップダウン・ポップオーバー・ツールチップ（引き出しの中から開いても上に出る） */
+  --z-modal: 400;     /* ダイアログと、その背後の覆い */
+  --z-toast: 500;     /* 通知 */
+
+  /* ---------- 画面幅の境目 ---------- */
+  /*
+   * CSS の @media の条件には変数を書けない。@media には下の値をそのまま書き、行末に変数名をコメントで添える。
+   * JS は getComputedStyle で下の変数を読む共通関数（components.md の breakpoints.js）だけを使う。
+   * 値を JS と CSS に別々に直書きしない（SKILL.md 8節 型F）。
+   */
+  --bp-sm: 640px;     /* これ未満はスマートフォン。1列にする */
+  --bp-md: 960px;     /* これ未満はサイドバーを引き出しに畳む */
+  --bp-lg: 1280px;    /* これ以上は詳細の2列を並べる */
+
+  /* ---------- 動き ---------- */
+  --duration-fast: 120ms;   /* 色・背景の変化 */
+  --duration-normal: 200ms; /* 引き出しの開閉 */
+  --easing: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ---------- 一般利用者向け: 余白と文字を1段広げる ---------- */
+[data-density="comfortable"] {
+  --space-page-x: var(--space-8);
+  --space-page-y: var(--space-6);
+  --space-section: var(--space-10);
+  --text-sm: 14px;
+  --text-md: 16px;
+  --row-h: 48px;
+  --control-h-sm: 32px;
+  --control-h-md: 40px;
+  --badge-h: 24px;
+}
+
+/* ---------- ダーク: OS の設定に従う（利用者が明示的にライトを選んだ場合を除く） ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --color-bg: #0d1117;
+    --color-bg-subtle: #151b23;
+    --color-bg-hover: #1f2630;
+    --color-bg-selected: #172a45;
+    --color-border: #3d444d;
+    --color-border-subtle: #262c36;
+    --color-text: #e6edf3;
+    --color-text-muted: #9198a1;
+    --color-text-disabled: #656c76;
+    --color-text-on-accent: #ffffff;
+    --color-accent: #2f81f7;
+    --color-accent-hover: #4493f8;
+    --color-accent-subtle: #121d2f;
+    --color-success: #3fb950;
+    --color-success-subtle: #12261e;
+    --color-warning: #d29922;
+    --color-warning-subtle: #272115;
+    --color-danger: #f85149;
+    --color-danger-hover: #ff7b72;
+    --color-danger-subtle: #25171c;
+    --color-focus-ring: #2f81f7;
+    --color-scrim: rgb(1 4 9 / 0.60);
+    --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
+    --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
+  }
+}
+
+/* ---------- ダーク: 利用者が明示的に選んだとき ---------- */
+/* 値は上の @media の中と同じにする。片方だけを変えない */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #0d1117;
+  --color-bg-subtle: #151b23;
+  --color-bg-hover: #1f2630;
+  --color-bg-selected: #172a45;
+  --color-border: #3d444d;
+  --color-border-subtle: #262c36;
+  --color-text: #e6edf3;
+  --color-text-muted: #9198a1;
+  --color-text-disabled: #656c76;
+  --color-text-on-accent: #ffffff;
+  --color-accent: #2f81f7;
+  --color-accent-hover: #4493f8;
+  --color-accent-subtle: #121d2f;
+  --color-success: #3fb950;
+  --color-success-subtle: #12261e;
+  --color-warning: #d29922;
+  --color-warning-subtle: #272115;
+  --color-danger: #f85149;
+  --color-danger-hover: #ff7b72;
+  --color-danger-subtle: #25171c;
+  --color-focus-ring: #2f81f7;
+  --color-scrim: rgb(1 4 9 / 0.60);
+  --shadow-overlay: 0 8px 24px rgb(1 4 9 / 0.60);
+  --shadow-modal: 0 12px 32px rgb(1 4 9 / 0.80);
+}
+
+/* ---------- 動きを減らす設定に従う ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+  }
+}
