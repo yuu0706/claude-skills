@@ -162,4 +162,6 @@ remote を付ける前の最初のコミットには効かないため、本 Ski
 | 名義の誤り（push 前） | リポジトリ単位で名義を設定し、`git commit --amend --reset-author --no-edit`。複数なら `git rebase --exec 'git commit --amend --reset-author --no-edit' <起点>`。ルートコミットを含む場合は `<起点>` の代わりに `--root` を使う |
 | push 済み | 履歴の書き換えは force-push を伴うため、本 Skill では行わない。秘匿情報なら、まず値の無効化（キーの再発行など）を案として出す |
 
+- **`git rebase --root --exec` で名義を書き直すと、マージのコミットは残らず、履歴が一直線になる（2026-10-16 観測）。** 書き直す前に控えのブランチ（例 `backup/before-reauthor-<日付>`）を作り、書き直した後に `git rev-parse HEAD^{tree}` が控えと同じであること（中身が変わっていないこと）を確かめる。控えのブランチは push しない。
+
 コミット以外の経路（メモリ・会話・公開・送信）で漏れた場合の手順と、作業の中で秘密情報・個人情報を扱う規則は Skill `security-rules` に従う（2026-10-06 追加）。
